@@ -9,14 +9,12 @@ public class MyMiddleWare
         _next = next;
     }
 
-    public async Task Invoke(HttpContext context)
+    public async Task InvokeAsync(HttpContext context)
     {
-        if (!context.Response.HasStarted)
+        if ( !context.Response.HasStarted)
         {
-            
+            context.Response.Headers.ContentType = "text";
         }
-
         await context.Response.WriteAsync("This text is from MyMiddleware ");
-        await _next(context);
     } 
 }
